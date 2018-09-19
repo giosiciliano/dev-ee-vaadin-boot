@@ -1,0 +1,38 @@
+package com.gio.composition;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="PROJECTS")
+public class ResearchProject {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
+	private int projectId;
+	
+	@Column(name="project_name")
+	private String projectName;
+	
+	@ManyToMany
+	@JoinTable(name="PROF_PROJECT",
+			joinColumns=@JoinColumn(name="projectId"),
+			inverseJoinColumns=@JoinColumn(name="professorId"))
+	private List<Professor> professors;
+	
+	public ResearchProject() {
+		this.professors = new ArrayList<Professor>();
+	}	
+
+}

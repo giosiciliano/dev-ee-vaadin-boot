@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.gio.inheritance.joined&apos; to &apos;com.gio.inheritance.tableperclass&apos;&#x0D;&#x0A;- Original project: &apos;FirstJPA-Inheritance-TablePerClass&apos;&#x0D;&#x0A;- Original element: &apos;FirstJPA-Inheritance-TablePerClass/src/main/java/com.gio.inheritance.joined&apos;&#x0D;&#x0A;- Renamed element: &apos;FirstJPA-Inheritance-TablePerClass/src/main/java/com.gio.inheritance.tableperclass&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.gio.inheritance.joined&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java&lt;com.gio.inheritance.joined" name="com.gio.inheritance.tableperclass" qualified="false" references="true" stamp="1527179823983" textual="false" version="1.0"/>
+</session>

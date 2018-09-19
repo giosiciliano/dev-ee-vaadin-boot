@@ -1,0 +1,5 @@
+package com.gio.callbacks;
+
+public class ArticleListener {
+
+}

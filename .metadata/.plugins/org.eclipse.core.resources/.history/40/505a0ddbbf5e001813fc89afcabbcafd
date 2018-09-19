@@ -1,0 +1,9 @@
+package com.gio.inheritance;
+
+import javax.persistence.Entity;
+
+@Entity
+@DiscrimintatorValue(value="C")
+public class Car extends Vehicle {
+
+}

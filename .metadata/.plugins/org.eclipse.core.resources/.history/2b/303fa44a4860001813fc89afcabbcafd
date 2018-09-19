@@ -1,0 +1,19 @@
+package com.gio.spring;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
+@EnableAutoConfiguration
+@RestController
+public class App {
+	
+	public static void main(String[] args) {
+		
+		SpringApplication.run(App.class, args);
+		
+	}
+
+	public String sayHello() {
+		return "Hello world from spring boot";
+	}
+}

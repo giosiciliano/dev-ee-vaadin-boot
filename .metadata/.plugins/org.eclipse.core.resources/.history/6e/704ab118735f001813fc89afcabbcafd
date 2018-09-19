@@ -1,0 +1,9 @@
+package com.gio.mapped;
+
+@MappedSuperclass
+public class AbstractPerson {
+
+	private String drivingLicense;
+	
+	
+}

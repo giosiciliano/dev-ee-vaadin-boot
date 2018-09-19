@@ -1,0 +1,6 @@
+package com.gio.composition;
+
+@Entity
+public class Address {
+
+}

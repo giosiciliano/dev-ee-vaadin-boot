@@ -1,0 +1,11 @@
+package com.gio.mapped;
+
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public class AbstractPerson {
+
+	private String drivingLicense;
+	
+	
+}

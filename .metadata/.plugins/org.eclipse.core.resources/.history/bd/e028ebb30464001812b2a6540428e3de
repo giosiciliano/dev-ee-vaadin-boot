@@ -1,0 +1,14 @@
+package com.gio.spring;
+
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+
+public class FirstView extends VerticalLayout implements View {
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		Label label = new Label("This is the first view...")
+		
+	}
+
+}

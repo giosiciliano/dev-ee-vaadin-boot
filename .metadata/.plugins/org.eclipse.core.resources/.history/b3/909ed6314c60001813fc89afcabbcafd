@@ -1,0 +1,12 @@
+package com.gio.spring;
+
+public class Address {
+	
+	private String address = "123 Main St"
+			
+	public String getAddress() {
+		return this.address;
+		
+	}
+
+}

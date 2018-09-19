@@ -1,0 +1,14 @@
+package com.gio;
+
+public class Student {
+
+	private Address address;
+	
+	public Student (Address address) {
+		this.address = address;
+	}
+	
+	public void showInfo() {
+		System.out.println("Student address is: " + address.getAddress());
+	}
+}

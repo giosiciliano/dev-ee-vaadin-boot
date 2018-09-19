@@ -1,0 +1,11 @@
+package com.gio;
+
+import org.springframework.context.annotation.Configuration;
+
+/*
+ * replaces beans.xml
+ */
+@Configuration
+public class MyConfig {
+
+}

@@ -1,0 +1,28 @@
+package com.gio.composition;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="PROFESSOR")
+public class Professor {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
+	private int professorId;
+	
+	@Column(name="professor_name")
+	private String professorName;
+	
+	@ManyToMany
+	private List<ResearchProject> projects;
+
+}

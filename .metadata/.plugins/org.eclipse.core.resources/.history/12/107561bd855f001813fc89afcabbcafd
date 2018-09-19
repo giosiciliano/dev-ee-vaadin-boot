@@ -1,0 +1,59 @@
+package com.gio.composition;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.gio.jpa");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+		// begin transaction
+		entityManager.getTransaction().begin();
+
+		// build object
+		Professor prof1 = new Professor("Salinger Siciliano");
+		Professor prof2 = new Professor("Simone Siciliano");
+		
+		ResearchProject p1 = new ResearchProject("Black Mole Project");
+		ResearchProject p2 = new ResearchProject("Quantum Field Theory Project");
+		ResearchProject p3 = new ResearchProject("Thermodynamic Fluctuations Project");
+
+		prof1.assignProjectToProfessor(p1);
+		prof1.assignProjectToProfessor(p2);
+		prof2.assignProjectToProfessor(p3);
+		prof2.assignProjectToProfessor(p1);
+		
+		p1.assignProfessorToProject(prof1);
+		p1.assignProfessorToProject(prof2);
+		p2.assignProfessorToProject(prof1);
+		p3.assignProfessorToProject(prof2);
+		
+		
+		// persist (Create) transaction(s)
+		entityManager.persist(prof1);
+		entityManager.persist(prof2);
+		entityManager.persist(p1);
+		entityManager.persist(p2);
+		entityManager.persist(p3);
+
+		// find (Read) and print value from table
+		// Person p = entityManager.find(Person.class, 6);
+		// System.out.println(p);
+
+		// remove (Delete) row from table
+		// entityManager.remove(p);
+
+		// commit transaction (for Create, Update, and Delete)
+		entityManager.getTransaction().commit();
+
+		// close both managers
+		entityManager.close();
+		entityManagerFactory.close();
+
+	}
+
+}

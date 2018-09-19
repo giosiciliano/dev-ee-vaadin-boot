@@ -1,0 +1,9 @@
+INDEX VERSION 1.4+C:\Dev\java\workspaces\dev-ee-vaadin-boot\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2093228050.index
+807635450.index
+1813859825.index
+1802840994.index
+2693831143.index
+396744154.index
+293646978.index
+3300965255.index

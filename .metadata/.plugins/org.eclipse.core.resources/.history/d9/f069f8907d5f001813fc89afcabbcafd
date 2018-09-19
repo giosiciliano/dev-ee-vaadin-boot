@@ -1,0 +1,47 @@
+package com.gio.composition.one2one;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.gio.jpa");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+		// begin transaction
+		entityManager.getTransaction().begin();
+		
+		// build object
+		Address add = new Address("123 Main St", 49203);
+		
+		Employee emp = new Employee();
+		emp.setEmployeeName("Joey");
+		emp.setAddress(add);
+		
+		add.setEmployee(emp);
+
+	
+		// persist (Create) transaction(s)
+		entityManager.persist(emp);
+		entityManager.persist(add);
+		
+		// find (Read) and print value from table
+		// Person p = entityManager.find(Person.class, 6);
+		// System.out.println(p);
+
+		// remove (Delete) row from table
+		// entityManager.remove(p);
+
+		// commit transaction (for Create, Update, and Delete)
+		entityManager.getTransaction().commit();
+
+		// close both managers
+		entityManager.close();
+		entityManagerFactory.close();
+
+	}
+
+}

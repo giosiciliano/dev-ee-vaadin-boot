@@ -1,0 +1,18 @@
+package com.gio.callbacks;
+
+import javax.persistence.PostPersist;
+import javax.persistence.PrePersist;
+
+public class ArticleListener {
+
+	@PrePersist
+	public void beforePersist() {
+		System.out.println("Before persist article...");
+	}
+
+	@PostPersist
+	public void afterPersist() {
+		System.out.println("After persist article...");
+	}
+
+}

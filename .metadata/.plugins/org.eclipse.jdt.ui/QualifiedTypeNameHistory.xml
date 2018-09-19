@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.gio.util.Utils"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="com.vaadin.event.FieldEvents.TextChangeListener"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.AbstractTextField.TextChangeEventMode"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.TextArea"/>
+<fullyQualifiedTypeName name="com.vaadin.shared.ui.label.ContentMode"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.TextField"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.Notification"/>
+<fullyQualifiedTypeName name="com.vaadin.data.Property.ValueChangeListener"/>
+<fullyQualifiedTypeName name="com.vaadin.shared.ui.combobox.FilteringMode"/>
+<fullyQualifiedTypeName name="com.vaadin.shared.ui.grid.HeightMode"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.Grid.SelectionMode"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.Grid.SingleSelectionModel"/>
+<fullyQualifiedTypeName name="com.gio.spring.Student2"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.Grid.MultiSelectionModel"/>
+<fullyQualifiedTypeName name="ch.qos.logback.core.net.SyslogOutputStream"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.TabSheet"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.Alignment"/>
+<fullyQualifiedTypeName name="com.vaadin.server.FontAwesome"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.GridLayout"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.themes.ValoTheme"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.Button.ClickListener"/>
+<fullyQualifiedTypeName name="com.vaadin.navigator.View"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.VerticalLayout"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.Label"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.Button"/>
+<fullyQualifiedTypeName name="com.vaadin.ui.Panel"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,389 @@
+package com.gio.spring;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.data.util.ObjectProperty;
+import com.vaadin.event.FieldEvents.TextChangeEvent;
+import com.vaadin.event.FieldEvents.TextChangeListener;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.shared.ui.combobox.FilteringMode;
+import com.vaadin.shared.ui.grid.HeightMode;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.ui.AbsoluteLayout;
+import com.vaadin.ui.AbstractTextField.TextChangeEventMode;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.CheckBox;
+import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.Grid;
+import com.vaadin.ui.Grid.MultiSelectionModel;
+import com.vaadin.ui.Grid.SelectionMode;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.OptionGroup;
+import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.TextArea;
+import com.vaadin.ui.TextField;
+import com.vaadin.ui.Tree;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
+
+@SpringUI(path = "/ui")
+@Title("This is the title")
+@Theme("valo")
+public class MainView extends UI {
+
+	@Override
+	protected void init(VaadinRequest request) {
+
+		// Label example (unmodifiable)
+		HorizontalLayout root = new HorizontalLayout();
+
+		ObjectProperty<String> prop1 = new ObjectProperty<String>("\n\nThis is with data binding\n\n");
+
+		Label lbl1 = new Label("<B><I>This is the label content</B></I>", ContentMode.HTML);
+		Label lbl2 = new Label(prop1, ContentMode.PREFORMATTED);
+
+		root.addComponent(lbl1);
+		root.addComponent(lbl2);
+		// -----------------------------
+
+		// TextField example
+		HorizontalLayout root2 = new HorizontalLayout();
+
+		String name = "";
+
+		ObjectProperty<String> prop2 = new ObjectProperty<String>(name);
+
+		TextField txt1 = new TextField("Name: ", prop2);
+		txt1.setImmediate(true);
+		// txt1.setMaxLength(10);
+
+		Label lbl3 = new Label(prop2);
+		lbl3.setCaption("Result: ");
+		root2.addComponent(txt1);
+		root2.addComponent(lbl3);
+		// -----------------------------
+
+		// TextField Events
+		HorizontalLayout root3 = new HorizontalLayout();
+
+		TextField txt2 = new TextField();
+		Label lbl4 = new Label();
+		lbl4.setImmediate(true);
+
+		txt2.addTextChangeListener(new TextChangeListener() {
+
+			@Override
+			public void textChange(TextChangeEvent event) {
+				int lngthOfTxt2 = event.getText().length();
+				lbl4.setValue("num of chars: " + lngthOfTxt2);
+			}
+
+		});
+
+		txt2.setTextChangeEventMode(TextChangeEventMode.EAGER);
+
+		root3.addComponent(txt2);
+		root3.addComponent(lbl4);
+		// -----------------------------
+
+		// TextArea example (multi-level version of label)
+		HorizontalLayout root4 = new HorizontalLayout();
+
+		TextArea textArea = new TextArea();
+		textArea.setWordwrap(false);
+		textArea.setHeight("400px");
+		textArea.setWidth("700px");
+		textArea.setValue("This is going to be a very long test so it will wrap broski ladida");
+
+		root4.addComponent(textArea);
+		// -----------------------------
+
+		// Button example
+		HorizontalLayout root5 = new HorizontalLayout();
+
+		Button button = new Button("Save");
+
+		/*
+		 * // <= Java 7 Version button.addClickListener(new Button.ClickListener() {
+		 * 
+		 * @Override public void buttonClick(ClickEvent event) { root5.addComponent(new
+		 * Label("Save clicked...")); Notification.show("Button has been clicked");
+		 * 
+		 * } });
+		 */
+
+		// Java 8 Version
+		button.addClickListener(event -> Notification.show("Save Clicked"));
+
+		root5.addComponent(button);
+		// -----------------------------
+
+		// Checkbox example
+		HorizontalLayout root6 = new HorizontalLayout();
+
+		CheckBox checkBox = new CheckBox("Has true");
+
+		// Fancy Java 8!
+		checkBox.addValueChangeListener(event -> System.out.println(checkBox.getValue()));
+
+		root6.addComponent(checkBox);
+		// -----------------------------
+
+		// OptionGroup example
+		HorizontalLayout root7 = new HorizontalLayout();
+
+		OptionGroup optGroup = new OptionGroup("Colleges");
+
+		optGroup.addItem("Umich");
+		optGroup.addItem("MIT");
+		optGroup.addItem("Caltech");
+		optGroup.addItem("Harvard");
+		optGroup.addItem("Yale");
+
+		// Fancy Java 8!
+		optGroup.addValueChangeListener(event -> System.out.println(event.getProperty().getValue()));
+		// or optGroup.getValue()
+
+		OptionGroup optGroup2 = new OptionGroup("Students");
+
+		optGroup2.setMultiSelect(true);
+
+		optGroup2.addItem(new Student2("Joe", 22));
+		optGroup2.addItem(new Student2("Mary", 24));
+		optGroup2.addItem(new Student2("Lucy", 19));
+
+		optGroup2.addValueChangeListener(new ValueChangeListener() {
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				Set<Student2> stus = (Set<Student2>) event.getProperty().getValue();
+				for (Student2 stu : stus) {
+					System.out.println(stu.getName());
+				}
+			}
+		});
+
+		root7.addComponent(optGroup);
+		root7.addComponent(optGroup2);
+		// -----------------------------
+
+		// ComboBox example
+		HorizontalLayout root8 = new HorizontalLayout();
+
+		ComboBox cBox = new ComboBox("Names");
+
+		cBox.setFilteringMode(FilteringMode.STARTSWITH);
+
+		cBox.addItem("Adam Smith");
+		cBox.addItem("Adan Villa");
+		cBox.addItem("Kevin Bly");
+		cBox.addItem("Brad Livesay");
+		cBox.addItem("Muthu Sub");
+
+		root8.addComponent(cBox);
+		// -----------------------------
+
+		// Grid example (proffered over tables bc of flexibility)
+		HorizontalLayout root9 = new HorizontalLayout();
+
+		List<Student2> students = new ArrayList<Student2>();
+		students.add(new Student2("Joe Smith", 32));
+		students.add(new Student2("Sal Swagie", 12));
+		students.add(new Student2("Adam Wheeler", 14));
+
+		BeanItemContainer<Student2> container = new BeanItemContainer<>(Student2.class, students);
+
+		Grid grid = new Grid(container);
+		// grid.setSelectionMode(SelectionMode.SINGLE);
+		grid.setSelectionMode(SelectionMode.MULTI);
+
+		// grid.addColumn("Name", String.class);
+		// grid.addColumn("Age", Integer.class);
+		// grid.addRow("Joe Smith", 32);
+
+		grid.setHeightMode(HeightMode.ROW);
+		grid.setHeightByRows(students.size());
+
+		Button btn2 = new Button("Remove", new Button.ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+
+				// Multi selection mode
+				MultiSelectionModel selModel = (MultiSelectionModel) grid.getSelectionModel();
+
+				for (Object selItem : selModel.getSelectedRows()) {
+					grid.getContainerDataSource().removeItem(selItem);
+				}
+
+				grid.getSelectionModel().reset();
+
+				// Single selection mode
+				// SingleSelectionModel selModel = (SingleSelectionModel)
+				// grid.getSelectionModel();
+				// Student2 selectedStudent = (Student2) selModel.getSelectedRow();
+				//
+				// grid.getContainerDataSource().removeItem(selectedStudent);
+				// grid.getSelectionModel().reset();
+			}
+		});
+
+		root9.addComponent(btn2);
+		root9.addComponent(grid);
+		// -----------------------------
+
+		// Tree example
+		HorizontalLayout root10 = new HorizontalLayout();
+
+		Tree menu = new Tree();
+
+		menu.addItem("Italy");
+		menu.addItem("Rome");
+		menu.addItem("Venice");
+		menu.setChildrenAllowed("Rome", false);
+		menu.setChildrenAllowed("Venice", false);
+		menu.setParent("Rome", "Italy");
+		menu.setParent("Venice", "Italy");
+
+		menu.addItem("Germany");
+		menu.addItem("Berlin");
+		menu.setChildrenAllowed("Berlin", false);
+		menu.setParent("Berlin", "Germany");
+
+		menu.expandItem("Italy");
+		menu.expandItem("Germany");
+
+		menu.addValueChangeListener(event -> System.out.println(event.getProperty().getValue()));
+
+		root10.addComponent(menu);
+		// -----------------------------
+
+		// Tabsheet example
+		HorizontalLayout root11 = new HorizontalLayout();
+		root11.setWidth("100%");
+
+		TabSheet tabs = new TabSheet();
+		tabs.setWidth("50%");
+
+		HorizontalLayout hLay1 = new HorizontalLayout();
+		hLay1.addComponent(new Label("this is layout 1"));
+
+		HorizontalLayout hLay2 = new HorizontalLayout();
+		hLay2.addComponent(new Label("this is layout 2"));
+
+		tabs.addTab(hLay1, "TAB1");
+		tabs.addTab(hLay2, "TAB2");
+
+		root11.addComponent(tabs);
+		root11.setComponentAlignment(tabs, Alignment.TOP_CENTER);
+		// -----------------------------
+
+		// HorizontalLayout example
+		HorizontalLayout root12 = new HorizontalLayout();
+		root12.setWidth("100%");
+
+		Button b1 = new Button("First");
+		b1.setWidth("100%");
+
+		Button b2 = new Button("Second");
+		b2.setWidth("100%");
+
+		root12.addComponent(b1);
+		root12.addComponent(b2);
+		root12.addComponent(new Button("Third"));
+
+		root12.setExpandRatio(b1, 1);
+		root12.setExpandRatio(b2, 1);
+		// -----------------------------
+
+		// VerticalLayout example
+		VerticalLayout root13 = new VerticalLayout();
+
+		Label lbl11 = new Label("This is the first line");
+		Label lbl12 = new Label("This is the second line");
+		Label lbl13 = new Label("This is the third line");
+
+		lbl11.setWidthUndefined();
+		lbl12.setWidthUndefined();
+		lbl13.setWidthUndefined();
+
+		root13.addComponent(lbl11);
+		root13.addComponent(lbl12);
+		root13.addComponent(lbl13);
+
+		root13.setComponentAlignment(lbl11, Alignment.MIDDLE_CENTER);
+		root13.setComponentAlignment(lbl12, Alignment.MIDDLE_RIGHT);
+		root13.setComponentAlignment(lbl13, Alignment.MIDDLE_LEFT);
+		// -----------------------------
+
+		// AbsoluteLayout example
+		AbsoluteLayout root14 = new AbsoluteLayout();
+
+		root14.setWidth("500px");
+		root14.setHeight("300px");
+
+		Button btn20 = new Button("This is a button");
+		root14.addComponent(btn20, "left:50px; top:100px;");
+		// -----------------------------
+
+		// AbsoluteLayout example
+		FormLayout root15 = new FormLayout();
+
+		TextField name20 = new TextField("Name");
+		name20.setIcon(FontAwesome.USER);
+
+		TextField address20 = new TextField("Address");
+		address20.setIcon(FontAwesome.ROAD);
+
+		root15.addComponent(name20);
+		root15.addComponent(address20);
+		// -----------------------------
+
+		// GridLayout example
+		GridLayout root16 = new GridLayout(3, 3);
+
+		Button lstBtn = new Button("new row button");
+		lstBtn.setWidth("100%");
+
+		// col, row
+		root16.addComponent(new TextField(), 0, 0);
+		root16.addComponent(new Button("Save"), 1, 0);
+		root16.addComponent(new Button("Remove"), 2, 0);
+		root16.addComponent(lstBtn, 0, 1, 2, 1);
+		// -----------------------------
+
+		// GridLayout example
+		GridLayout root17 = new GridLayout(3, 3);
+
+		Button lstBtn = new Button("new row button");
+		lstBtn.setWidth("100%");
+
+		// col, row
+		root16.addComponent(new TextField(), 0, 0);
+		root16.addComponent(new Button("Save"), 1, 0);
+		root16.addComponent(new Button("Remove"), 2, 0);
+		root16.addComponent(lstBtn, 0, 1, 2, 1);
+		// -----------------------------
+
+		// Set to whatever example you would like to see
+		setContent(root16);
+		// -----------------------------
+
+	}
+
+}

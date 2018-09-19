@@ -1,0 +1,9 @@
+package com.gio.composition;
+
+import javax.persistence.Entity;
+
+@Entity
+@Table(name="PROJECTS")
+public class ResearchProject {
+
+}

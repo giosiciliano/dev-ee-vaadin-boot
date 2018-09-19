@@ -1,0 +1,21 @@
+package com.gio;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/*
+ * replaces beans.xml
+ */
+@Configuration
+public class MyConfig {
+	
+	@Bean
+	public Student getStudent() {
+		return new Student();
+	}
+	
+	public Address getAddress() {
+		return new Address();
+	}
+
+}

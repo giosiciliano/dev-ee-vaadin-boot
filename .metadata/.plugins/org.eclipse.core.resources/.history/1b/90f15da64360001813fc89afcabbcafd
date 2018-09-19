@@ -1,0 +1,8 @@
+package com.gio;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class MyConfig {
+
+}

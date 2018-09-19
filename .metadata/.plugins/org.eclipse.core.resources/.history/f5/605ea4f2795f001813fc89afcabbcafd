@@ -1,0 +1,24 @@
+package com.gio.composition;
+
+import javax.persistence.Column;
+// use javax (specification) instead of hibernate (implementation) imports
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ADDRESS_TABLE")
+public class Address {
+	
+	@Id
+	@GeneratedValue
+	private int addressId;
+	
+	@Column(name="address_name")
+	private String addressName;
+	
+	@Column
+	private int zipcode;
+
+}

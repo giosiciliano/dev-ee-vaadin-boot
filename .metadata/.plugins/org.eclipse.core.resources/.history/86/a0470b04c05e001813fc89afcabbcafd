@@ -1,0 +1,16 @@
+package com.gio.inheritance;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value="C")
+public class Car extends Vehicle {
+
+	private int speed;
+	
+	public Car() {}
+	
+	
+	
+}

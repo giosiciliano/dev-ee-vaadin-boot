@@ -1,0 +1,24 @@
+package com.gio;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+
+/*
+ * replaces beans.xml
+ */
+@Configuration
+public class MyConfig {
+	
+	@Bean(name="student_bean")
+	@Scope(value="singleton")
+	public Student getStudent() {
+		return new Student();
+	}
+	
+	@Bean(name="address_bean")
+	public Address getAddress() {
+		return new Address();
+	}
+
+}

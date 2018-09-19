@@ -1,0 +1,38 @@
+package com.gio.callbacks;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.PostPersist;
+import javax.persistence.PrePersist;
+
+@Entity
+public class Article {
+
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int id;
+
+	@Column(name = "article_name")
+	private String articleName;
+
+	public Article() {
+	}
+
+	public Article(String articleName) {
+		this.articleName = articleName;
+	}
+
+	@PrePersist
+	public void beforePersist() {
+		System.out.println("Before persist article...");
+	}
+
+	@PostPersist
+	public void afterPersist() {
+		System.out.println("After persist article...");
+	}
+
+}
